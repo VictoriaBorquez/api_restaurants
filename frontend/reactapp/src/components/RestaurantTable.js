@@ -13,7 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
-
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 export function RestaurantTable() {
     const [restaurants, setRestaurants] = useState([]);
@@ -28,9 +28,21 @@ export function RestaurantTable() {
       fetchData();
     }, []);
 
+    const deleteRestaurant = (id) => {
+        axios.delete(`http://0.0.0.0:8000/restaurants/${id}`)
+          .then(response => {
+            alert("Se ha eliminado correctamente el restaurante.")
+            window.location.reload();
+          })
+          .catch(error => {
+            alert("Error: No se ha podido eliminar el restaurante.")
+          });
+    };
+
+
     return (
         <TableContainer component={Paper}>
-            <h1>Tabla de Restaurantes</h1>
+            <h1><RestaurantIcon/>  Tabla de Restaurantes <RestaurantIcon/> </h1>
             <Button variant="contained" startIcon={<AddCircleIcon />} color="success">
                 Agregar Restaurant
             </Button>
@@ -61,7 +73,7 @@ export function RestaurantTable() {
                                 <EditIcon fontSize="inherit" color="primary"/>
                             </IconButton>
                             <IconButton aria-label="delete" size="large">
-                                <DeleteIcon fontSize="inherit" color="error"/>
+                                <DeleteIcon fontSize="inherit" color="error" onClick={() => deleteRestaurant(restaurant.id)}/>
                             </IconButton>
                         </TableCell>
                     </TableRow>
