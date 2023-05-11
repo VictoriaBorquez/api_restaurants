@@ -9,6 +9,6 @@ class Restaurant(Base):
     name = Column(String)
     location = Column(String)
     type_food= Column(String)
-    calification = Column(String, default=None)
+    calification = Column(Integer, default=None)
     location = Column(String)
     visited = Column(Boolean, default=False)
