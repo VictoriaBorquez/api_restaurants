@@ -77,3 +77,18 @@ def create_restaurant(restaurant: schemas.Restaurant, db: Session = Depends(get_
     db.commit()
     db.refresh(restaurant)
     return restaurant
+
+@app.put("/restaurants/{id}", tags=["restaurants"], response_model=schemas.Restaurant)
+def update_restaurants(id: int, restaurant: schemas.RestaurantUpdate, db: Session = Depends(get_db)):
+    db_restaurants = db.query(Restaurant).filter(Restaurant.id == id).first()
+    if db_restaurants:
+        db_restaurants.name = restaurant.name
+        db_restaurants.location = restaurant.location
+        db_restaurants.type_food = restaurant.type_food
+        db_restaurants.calification = restaurant.calification
+        db_restaurants.visited = restaurant.visited
+        db.commit()
+        db.refresh(db_restaurants)
+        return db_restaurants
+    else:
+        raise HTTPException(status_code=404, detail="Restaurant not found")
