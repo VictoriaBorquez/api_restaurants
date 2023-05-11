@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from . import schemas, models
@@ -55,3 +55,10 @@ app.add_middleware(
 def get_restaurants(db: Session = Depends(get_db)):
     restaurants = db.query(Restaurant).all()
     return restaurants
+
+@app.get("/restaurants/{id}", tags=["restaurants"], response_model=schemas.Restaurant)
+def get_restaurants(id: int, db: Session = Depends(get_db)):
+    restaurant = db.query(Restaurant).filter(Restaurant.id == id).first()
+    if restaurant is None:
+        raise HTTPException(status_code=404, detail="Restaurant not found")
+    return restaurant
