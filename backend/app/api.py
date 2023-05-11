@@ -79,7 +79,7 @@ def create_restaurant(restaurant: schemas.Restaurant, db: Session = Depends(get_
     return restaurant
 
 @app.put("/restaurants/{id}", tags=["restaurants"], response_model=schemas.Restaurant)
-def update_restaurants(id: int, restaurant: schemas.RestaurantUpdate, db: Session = Depends(get_db)):
+def update_restaurant(id: int, restaurant: schemas.RestaurantUpdate, db: Session = Depends(get_db)):
     db_restaurants = db.query(Restaurant).filter(Restaurant.id == id).first()
     if db_restaurants:
         db_restaurants.name = restaurant.name
@@ -90,5 +90,16 @@ def update_restaurants(id: int, restaurant: schemas.RestaurantUpdate, db: Sessio
         db.commit()
         db.refresh(db_restaurants)
         return db_restaurants
+    else:
+        raise HTTPException(status_code=404, detail="Restaurant not found")
+
+
+@app.delete("/restaurants/{id}", tags=["restaurants"])
+def delete_restaurant(id: int, db: Session = Depends(get_db)):
+    restaurant = db.query(Restaurant).filter(Restaurant.id == id).first()
+    if restaurant:
+        db.delete(restaurant)
+        db.commit()
+        return {"message": "Restaurant deleted successfully"}
     else:
         raise HTTPException(status_code=404, detail="Restaurant not found")
