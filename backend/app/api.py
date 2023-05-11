@@ -62,3 +62,18 @@ def get_restaurants(id: int, db: Session = Depends(get_db)):
     if restaurant is None:
         raise HTTPException(status_code=404, detail="Restaurant not found")
     return restaurant
+
+@app.post("/restaurants/", response_model=schemas.Restaurant)
+def create_restaurant(restaurant: schemas.Restaurant, db: Session = Depends(get_db)):
+    restaurant = Restaurant(
+        id=restaurant.id,
+        name=restaurant.name,
+        location=restaurant.location,
+        type_food=restaurant.type_food,
+        calification=restaurant.calification,
+        visited=restaurant.visited
+    )
+    db.add(restaurant)
+    db.commit()
+    db.refresh(restaurant)
+    return restaurant
