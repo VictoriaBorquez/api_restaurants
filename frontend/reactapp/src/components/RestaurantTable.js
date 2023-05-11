@@ -10,15 +10,13 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import UpdateRestaurantModal from './UpdateRestaurantModal';
 
 export function RestaurantTable() {
     const [restaurants, setRestaurants] = useState([]);
-
-
 
     useEffect(() => {
       async function fetchData() {
@@ -38,6 +36,32 @@ export function RestaurantTable() {
             alert("Error: No se ha podido eliminar el restaurante.")
           });
     };
+
+    const handleUpdateRestaurant = (updatedRestaurant) => {
+        const updatedRestaurants = restaurants.map((restaurant) => {
+          if (restaurant.id === updatedRestaurant.id) {
+            return updatedRestaurant;
+          }
+          return restaurant;
+        });
+        setRestaurants(updatedRestaurants);
+        window.location.reload();
+      };
+
+      const updateVisitedRestaurant = async (restaurant) => {
+        const { id, visited } = restaurant;
+      
+        try {
+          await axios.put(`http://0.0.0.0:8000/restaurants/${id}`, { visited: !visited });
+          setRestaurants(
+            restaurants.map((r) =>
+              r.id === id ? { ...r, visited: !visited } : r
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
 
     return (
@@ -67,11 +91,9 @@ export function RestaurantTable() {
                         <TableCell align="right">{restaurant.location}</TableCell>
                         <TableCell align="right">{restaurant.type_food}</TableCell>
                         <TableCell align="right">{restaurant.calification}</TableCell>
-                        <TableCell align="right">{restaurant.visited ? <Checkbox checked={true} /> : <Checkbox checked={false}/>}</TableCell>
+                        <TableCell align="right">{restaurant.visited ? <Checkbox checked={true}/> : <Checkbox checked={false}/>}</TableCell>
                         <TableCell align="right">
-                            <IconButton aria-label="delete" size="large">
-                                <EditIcon fontSize="inherit" color="primary"/>
-                            </IconButton>
+                            <UpdateRestaurantModal restaurant={restaurant} onUpdate={handleUpdateRestaurant} />
                             <IconButton aria-label="delete" size="large">
                                 <DeleteIcon fontSize="inherit" color="error" onClick={() => deleteRestaurant(restaurant.id)}/>
                             </IconButton>
