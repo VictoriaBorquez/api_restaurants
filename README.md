@@ -47,6 +47,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   ```
   
 - **Modificar permisos archivo y Crear base de datos**:
+  En carpeta backend/app:
    ```
   chmod +x create_db.sh
   ```
@@ -58,6 +59,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 - **Correr Backend**:
 
   En una terminal:
+  En carpeta backend:
   ```
   python main.py
   ```
@@ -65,6 +67,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 - **Correr Frontend**:
 
   En otra terminal:
+  En carpeta frontend/reactapp:
   ```
   npm start
   ```
