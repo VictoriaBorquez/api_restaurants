@@ -1,10 +1,6 @@
 # API Restaurantes del mundo
 Aplicación web que muestra a través de una tabla los restaurantes del mundo (Nombre, Ubicación, Tipo de comida, Calificación, Visitado). Permite agregar nuevos restaurantes, eliminar o editar los ya existentes, filtrar por nombre de restaurante y por tipo de comida, y ordenar de forma ascendente o descendente.
 
-## :clapper: Demo
-
-![demo_api](https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/86ccba89-352a-4336-9343-453b944a526c)
-
 ## Herramientas/Tecnologías utilizadas
 - **Backend**: 
 
