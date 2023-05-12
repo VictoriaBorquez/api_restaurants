@@ -1,5 +1,6 @@
-pip install fastapi==0.78.0 uvicorn==0.17.
-pip install sqlalchemy
-pip install psycopg2
-pip install pydantic
-pip install faker
+fastapi==0.78.0 
+uvicorn==0.17
+sqlalchemy
+psycopg2
+pydantic
+faker
