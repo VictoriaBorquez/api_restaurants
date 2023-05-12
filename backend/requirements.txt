@@ -1,5 +1,5 @@
-fastapi==0.78.0 
-uvicorn==0.17
+fastapi[all]
+uvicorn[standard]
 sqlalchemy
 psycopg2
 pydantic
