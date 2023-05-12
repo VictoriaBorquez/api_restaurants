@@ -90,4 +90,14 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 
   http://0.0.0.0:8000/docs
   
+  <table>
+  <tr>
+    <td>
+    <p align="center">
+    <img src="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/17a7ef17-57af-48d4-936b-c099ebb6f35d" alt="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/17a7ef17-57af-48d4-936b-c099ebb6f35d" width="800"/>
+    </p>
+    </td>
+  </tr>
+  </table>
+  
   http://0.0.0.0:8000/redoc
