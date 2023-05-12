@@ -28,14 +28,18 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   ```
     https://github.com/VictoriaBorquez/api_restaurants.git
   ```
- 
+- **Requisitos**:
+  - Tener instalado:
+    - Python
+    - Postgresql
+
  - **Instalar y Activar entorno virtual**:
   En carpeta backend 
    ```
    cd backend
    ```
    ```
-   python3.10 -m venv venv
+   python3 -m venv venv
    ```
    ```
    source venv/bin/activate
@@ -78,26 +82,4 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 
   http://0.0.0.0:8000/docs
   
-  <table>
-  <tr>
-    <td>
-    <p align="center">
-    <img src="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/8cdbb66b-2868-4d3c-bd21-1dcc79e287f5" alt="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/8cdbb66b-2868-4d3c-bd21-1dcc79e287f5" width="800"/>
-    </p>
-    </td>
-  </tr>
-  </table>
-
-
-
-
   http://0.0.0.0:8000/redoc
-  <table>
-  <tr>
-    <td>
-    <p align="center">
-    <img src="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/3acdc664-0dfd-4a37-9b60-42dbec0add34" alt="https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/3acdc664-0dfd-4a37-9b60-42dbec0add34" width="800"/>
-    </p>
-    </td>
-  </tr>
-  </table>
