@@ -14,9 +14,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Button from '@mui/material/Button';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import UpdateRestaurantModal from './UpdateRestaurantModal';
+import CreateRestaurantModal from './CreateRestaurantModal';
+
 
 export function RestaurantTable() {
     const [restaurants, setRestaurants] = useState([]);
+    const [open, setOpen] = useState(false);
+
 
     useEffect(() => {
       async function fetchData() {
@@ -48,28 +52,39 @@ export function RestaurantTable() {
         window.location.reload();
       };
 
-      const updateVisitedRestaurant = async (restaurant) => {
-        const { id, visited } = restaurant;
-      
-        try {
-          await axios.put(`http://0.0.0.0:8000/restaurants/${id}`, { visited: !visited });
-          setRestaurants(
-            restaurants.map((r) =>
-              r.id === id ? { ...r, visited: !visited } : r
-            )
-          );
-        } catch (error) {
-          console.log(error);
-        }
+      const handleCreate = (newRestaurant) => {
+        axios.post('http://0.0.0.0:8000/restaurants/', newRestaurant)
+            .then(response => {
+                alert('Restaurante creado exitosamente')
+                handleClose(); 
+                window.location.reload();
+            })
+            .catch(error =>{
+                alert("Error: No se ha podido crear el restaurante.")
+            });
+      };
+
+      const handleOpen = () => {
+        setOpen(true);
+      };
+
+    
+      const handleClose = () => {
+        setOpen(false);
       };
 
 
     return (
         <TableContainer component={Paper}>
             <h1><RestaurantIcon/>  Tabla de Restaurantes <RestaurantIcon/> </h1>
-            <Button variant="contained" startIcon={<AddCircleIcon />} color="success">
+            <Button variant="contained" startIcon={<AddCircleIcon />} color="success" onClick={handleOpen}>
                 Agregar Restaurant
             </Button>
+            <CreateRestaurantModal
+                open={open}
+                onClose={handleClose}
+                onCreate={handleCreate}
+            />
 
             <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
                 <TableHead>
