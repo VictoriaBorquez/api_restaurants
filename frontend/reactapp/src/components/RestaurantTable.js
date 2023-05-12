@@ -15,20 +15,27 @@ import Button from '@mui/material/Button';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import UpdateRestaurantModal from './UpdateRestaurantModal';
 import CreateRestaurantModal from './CreateRestaurantModal';
-
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 
 export function RestaurantTable() {
     const [restaurants, setRestaurants] = useState([]);
     const [open, setOpen] = useState(false);
+    const [sortColumn, setSortColumn] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null);
 
 
     useEffect(() => {
       async function fetchData() {
-        const response = await axios.get('http://0.0.0.0:8000/restaurants');
+        const response = await axios.get('http://0.0.0.0:8000/restaurants', {
+            params: {
+                sort_column: sortColumn,
+                sort_order: sortOrder,
+              },
+        });
         setRestaurants(response.data);
       }
       fetchData();
-    }, []);
+    }, [sortColumn, sortOrder]);
 
     const deleteRestaurant = (id) => {
         axios.delete(`http://0.0.0.0:8000/restaurants/${id}`)
@@ -73,6 +80,15 @@ export function RestaurantTable() {
         setOpen(false);
       };
 
+      const handleSort = (column) => {
+        if (sortColumn === column) {
+          setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        } else {
+          setSortColumn(column);
+          setSortOrder("asc");
+        }
+      };
+
 
     return (
         <TableContainer component={Paper}>
@@ -86,22 +102,43 @@ export function RestaurantTable() {
                 onCreate={handleCreate}
             />
 
+
             <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
-                <TableHead>
+                <TableHead >
                     <TableRow>
-                        <TableCell align="right">ID</TableCell>
-                        <TableCell align="right">Nombre Restaurante</TableCell>
-                        <TableCell align="right">Ubicación</TableCell>
-                        <TableCell align="right">Tipo de comida</TableCell>
-                        <TableCell align="right">Calificación</TableCell>
-                        <TableCell align="right">Visitado</TableCell>
+                        <TableCell align="right" >
+                            Nombre Restaurante
+                            <IconButton size="large">
+                                <SwapVertIcon fontSize="inherit" onClick={() => handleSort("name")}/>
+                            </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                            Ubicación
+                            <IconButton size="large">
+                                <SwapVertIcon fontSize="inherit" onClick={() => handleSort("location")}/>
+                            </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                            Tipo de comida
+                            <IconButton size="large">
+                                <SwapVertIcon fontSize="inherit" onClick={() => handleSort("type_food")}/>
+                            </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                            Calificación
+                            <IconButton size="large">
+                                <SwapVertIcon fontSize="inherit" onClick={() => handleSort("calification")}/>
+                            </IconButton>
+                        </TableCell>
+                        <TableCell align="right">
+                            Visitado
+                        </TableCell>
                         <TableCell align="right">Acciones</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                 {restaurants.map(restaurant => (
                     <TableRow key={restaurant.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell align="right">{restaurant.id}</TableCell>
                         <TableCell align="right">{restaurant.name}</TableCell>
                         <TableCell align="right">{restaurant.location}</TableCell>
                         <TableCell align="right">{restaurant.type_food}</TableCell>
