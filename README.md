@@ -22,7 +22,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 - **Clonar repositorio**:
 
   ```
-    https://github.com/VictoriaBorquez/api_restaurants.git
+    git clone https://github.com/VictoriaBorquez/api_restaurants.git
   ```
 - **Requisitos**:
   - Tener instalado:
