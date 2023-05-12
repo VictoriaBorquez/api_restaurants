@@ -28,6 +28,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   - Tener instalado:
     - Python
     - Postgresql
+    - Node.js
 
  - **Instalar y Activar entorno virtual**:
   En carpeta backend 
