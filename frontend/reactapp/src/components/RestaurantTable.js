@@ -19,7 +19,7 @@ import SwapVertIcon from '@mui/icons-material/SwapVert';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
+import TextField from '@mui/material/TextField';
 
 
 export function RestaurantTable() {
@@ -28,6 +28,7 @@ export function RestaurantTable() {
     const [sortColumn, setSortColumn] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
     const [filterValue, setFilterValue] = useState("");
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
 
     useEffect(() => {
@@ -36,12 +37,13 @@ export function RestaurantTable() {
             params: {
                 sort_column: sortColumn,
                 sort_order: sortOrder,
+                filter_value: filteredRestaurants
               },
         });
         setRestaurants(response.data);
       }
       fetchData();
-    }, [sortColumn, sortOrder]);
+    }, [sortColumn, sortOrder, filteredRestaurants]);
 
     const deleteRestaurant = (id) => {
         axios.delete(`http://0.0.0.0:8000/restaurants/${id}`)
@@ -95,11 +97,10 @@ export function RestaurantTable() {
         }
       };
 
+
       const handleFilterChange = (value) => {
         setFilterValue(value);
       };
-
-
 
 
     return (
@@ -123,6 +124,12 @@ export function RestaurantTable() {
                             <IconButton size="large">
                                 <SwapVertIcon fontSize="inherit" onClick={() => handleSort("name")}/>
                             </IconButton>
+                            <TextField
+                            label="Nombre"
+                            margin="normal"
+                            onChange={(event) => setFilteredRestaurants(event.target.value)}
+                            />
+                            
                         </TableCell>
                         <TableCell align="right">
                             Ubicación
