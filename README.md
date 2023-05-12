@@ -30,12 +30,15 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   ```
  
  - **Instalar y Activar entorno virtual**:
+  En carpeta backend 
+   ```
+   cd backend
+   ```
    ```
    python3.10 -m venv venv
    ```
-
    ```
-    source venv/bin/activate
+   source venv/bin/activate
    ```
  
 - **Instalar requirements.txt python**:
@@ -46,27 +49,33 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 - **Modificar permisos archivo y Crear base de datos**:
    ```
   chmod +x create_db.sh
-   ```
+  ```
   ```
   ./create_db.sh
   ```
 
 
 - **Correr Backend**:
+
+  En una terminal:
   ```
   python main.py
   ```
 
 - **Correr Frontend**:
+
+  En otra terminal:
   ```
   npm start
   ```
 
-Abrir navegador: 
+- **Visualizar**:
 
+  Abrir navegador: 
+  http://localhost:3001
 
-### Backend (Documentación API)
+## Backend (Documentación API)
 
-http://0.0.0.0:8000/docs
+  http://0.0.0.0:8000/docs
 
-http://0.0.0.0:8000/redoc
+  http://0.0.0.0:8000/redoc
