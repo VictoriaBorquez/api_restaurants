@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from . import schemas, models
 from .models import Restaurant
 from .database import SessionLocal, engine
@@ -52,13 +53,16 @@ app.add_middleware(
 
 
 @app.get("/restaurants", tags=["restaurants"], response_model=List[schemas.Restaurant])
-def get_restaurants(db: Session = Depends(get_db), sort_column: Optional[str] = Query(None), sort_order: Optional[str] = Query(None)):
+def get_restaurants(db: Session = Depends(get_db), sort_column: Optional[str] = Query(None), sort_order: Optional[str] = Query(None), filter_value: str = None):
     restaurants = db.query(Restaurant)
     if sort_column:
         if sort_order == "asc":
             restaurants = restaurants.order_by(getattr(Restaurant, sort_column))
         elif sort_order == "desc":
             restaurants = restaurants.order_by(getattr(Restaurant, sort_column).desc())
+    if filter_value:
+        restaurants = restaurants.filter(Restaurant.name.ilike(f"%{filter_value}%"))
+
     restaurants = restaurants.all()
     return restaurants
 
