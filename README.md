@@ -3,7 +3,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 
 ## :clapper: Demo
 
-
+![demo_api](https://github.com/VictoriaBorquez/api_restaurants/assets/66185308/86ccba89-352a-4336-9343-453b944a526c)
 
 ## Herramientas/Tecnologías utilizadas
 - **Backend**: 
