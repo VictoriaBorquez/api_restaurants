@@ -10,7 +10,7 @@ def generate_restaurants_data():
         restaurant = {
             'id': fake.unique.random_number(digits=8),
             'name': fake.company(),
-            'location': fake.address(),
+            'location': fake.city() + ", " +  fake.country(),
             'type_food': fake.random_element(['Italian', 'Mexican', 'Chinese', 'Indian']),
             'calification': random.randint(1, 5),
             'visited': fake.boolean(chance_of_getting_true=50),

@@ -38,8 +38,8 @@ def get_db() -> Session:
     return db
 
 origins = [
-    "http://localhost:3000",
-    "localhost:3000"
+    "http://localhost:3001",
+    "localhost:3001"
 ]
 
 app.add_middleware(
