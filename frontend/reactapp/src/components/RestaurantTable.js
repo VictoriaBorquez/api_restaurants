@@ -16,12 +16,18 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import UpdateRestaurantModal from './UpdateRestaurantModal';
 import CreateRestaurantModal from './CreateRestaurantModal';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
+
 
 export function RestaurantTable() {
     const [restaurants, setRestaurants] = useState([]);
     const [open, setOpen] = useState(false);
     const [sortColumn, setSortColumn] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
+    const [filterValue, setFilterValue] = useState("");
 
 
     useEffect(() => {
@@ -89,6 +95,12 @@ export function RestaurantTable() {
         }
       };
 
+      const handleFilterChange = (value) => {
+        setFilterValue(value);
+      };
+
+
+
 
     return (
         <TableContainer component={Paper}>
@@ -123,6 +135,13 @@ export function RestaurantTable() {
                             <IconButton size="large">
                                 <SwapVertIcon fontSize="inherit" onClick={() => handleSort("type_food")}/>
                             </IconButton>
+                            <Select value={filterValue} onChange={(event) => handleFilterChange(event.target.value)}>
+                                <MenuItem value="">Todos</MenuItem>
+                                <MenuItem value="Italian">Italian</MenuItem>
+                                <MenuItem value="Mexican">Mexican</MenuItem>
+                                <MenuItem value="Chinese">Chinese</MenuItem>
+                                <MenuItem value="Indian">Indian</MenuItem>
+                            </Select>
                         </TableCell>
                         <TableCell align="right">
                             Calificación
@@ -137,7 +156,7 @@ export function RestaurantTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {restaurants.map(restaurant => (
+                {restaurants.filter(restaurant => filterValue === '' ||  restaurant.type_food === filterValue).map(restaurant => (
                     <TableRow key={restaurant.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell align="right">{restaurant.name}</TableCell>
                         <TableCell align="right">{restaurant.location}</TableCell>
