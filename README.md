@@ -28,7 +28,28 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   ```
     https://github.com/VictoriaBorquez/api_restaurants.git
   ```
-- **Instalar requeriments.txt python**:
+ 
+ - **Instalar y Activar entorno virtual**:
+   ```
+   python3.10 -m venv venv
+   ```
+
+   ```
+    source venv/bin/activate
+   ```
+ 
+- **Instalar requirements.txt python**:
+  ```
+  pip install -r requirements.txt
+  ```
+  
+- **Modificar permisos archivo y Crear base de datos**:
+   ```
+  chmod +x create_db.sh
+   ```
+  ```
+  ./create_db.sh
+  ```
 
 
 - **Correr Backend**:
