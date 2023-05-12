@@ -70,6 +70,9 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
   En otra terminal:
   En carpeta frontend/reactapp:
   ```
+  npm install
+  ```
+  ```
   npm start
   ```
 
