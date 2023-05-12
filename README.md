@@ -27,6 +27,7 @@ Aplicación web que muestra a través de una tabla los restaurantes del mundo (N
 - **Requisitos**:
   - Tener instalado:
     - Python
+    - FastAPI
     - Postgresql
     - Node.js
 
